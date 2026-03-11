@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ajay Jadeja</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #ffffff;
+    --off: #f8f8f6;
+    --black: #111111;
+    --ink: #1a1a1a;
+    --mid: #555555;
+    --light: #888888;
+    --rule: #e8e8e4;
+    --blue: #1a73e8;
+    --blue-light: #e8f0fe;
+    --green: #188038;
+    --green-light: #e6f4ea;
+    --orange: #e37400;
+    --orange-light: #fef7e0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--rule); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 60px;
+  }
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--black); letter-spacing: -.3px;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-size: .82rem; color: var(--light);
+    text-decoration: none; font-weight: 500;
+    letter-spacing: .3px; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta {
+    font-size: .8rem; font-weight: 500;
+    color: var(--blue); text-decoration: none;
+    border: 1px solid var(--blue);
+    padding: .38rem 1.1rem; border-radius: 4px;
+    transition: .2s;
+  }
+  .nav-cta:hover { background: var(--blue); color: #fff; }
+
+  /* ─── CONTAINER ─── */
+  .container { max-width: 980px; margin: 0 auto; padding: 0 4rem; }
+
+  /* ─── HERO ─── */
+  #hero {
+    padding: 6rem 0 5rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 4rem; align-items: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-size: .75rem; font-weight: 500;
+    color: var(--blue); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--blue);
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-weight: 700; line-height: 1.06;
+    letter-spacing: -1.5px; color: var(--black);
+    margin-bottom: 1.4rem;
+  }
+  h1 em {
+    font-style: italic; color: var(--blue);
+  }
+  .hero-bio {
+    font-size: 1rem; color: var(--mid);
+    line-height: 1.8; max-width: 520px;
+    margin-bottom: 2.2rem; font-weight: 300;
+  }
+  .hero-bio strong { color: var(--ink); font-weight: 500; }
+  .hero-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: .65rem 1.6rem; border-radius: 4px;
+    font-size: .85rem; font-weight: 500;
+    text-decoration: none; transition: .2s;
+    letter-spacing: .2px;
+  }
+  .btn-primary:hover { background: #1557b0; }
+  .btn-text {
+    font-size: .85rem; color: var(--blue);
+    text-decoration: none; font-weight: 500;
+    display: flex; align-items: center; gap: .3rem;
+    transition: gap .2s;
+  }
+  .btn-text:hover { gap: .6rem; }
+  .btn-text::after { content: '→'; }
+
+  /* avatar placeholder */
+  .hero-avatar {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
+    border: 3px solid var(--rule);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .avatar-initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 700;
+    color: var(--blue); line-height: 1;
+  }
+  .avatar-sub {
+    font-size: .65rem; color: var(--blue);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-top: .4rem; opacity: .6;
+  }
+
+  /* ─── STATS ─── */
+  .stats-row {
+    display: flex; gap: 0;
+    border: 1px solid var(--rule); border-radius: 8px;
+    overflow: hidden; margin-top: 3.5rem;
+    background: var(--off);
+  }
+  .stat {
+    flex: 1; padding: 1.5rem 1.2rem;
+    border-right: 1px solid var(--rule);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem; font-weight: 700;
+    color: var(--black); line-height: 1;
+    margin-bottom: .25rem;
+  }
+  .stat-l { font-size: .72rem; color: var(--light); letter-spacing: .5px; }
+
+  /* ─── SECTION ─── */
+  .section { padding: 4.5rem 0; border-bottom: 1px solid var(--rule); }
+  .section-label {
+    font-size: .7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--light); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--rule);
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 600;
+    color: var(--black); letter-spacing: -.5px;
+    margin-bottom: .4rem;
+  }
+  .section-sub {
+    font-size: .9rem; color: var(--light);
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+
+  /* ─── PROJECT CARDS ─── */
+  .project-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .project-item {
+    background: var(--white);
+    padding: 2rem 2.2rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 2rem; align-items: start;
+    transition: background .2s;
+  }
+  .project-item:hover { background: var(--off); }
+  .p-index {
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem; color: var(--light);
+    letter-spacing: 1px; margin-bottom: .5rem;
+  }
+  .p-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--black); margin-bottom: .3rem;
+  }
+  .p-stack {
+    font-size: .75rem; color: var(--blue);
+    font-weight: 500; margin-bottom: .8rem;
+    letter-spacing: .3px;
+  }
+  .p-desc { font-size: .88rem; color: var(--mid); line-height: 1.7; margin-bottom: 1rem; font-weight: 300; }
+  .p-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .p-tag {
+    font-size: .68rem; padding: .22rem .6rem;
+    border-radius: 3px; background: var(--off);
+    border: 1px solid var(--rule); color: var(--mid);
+    font-weight: 500;
+  }
+  .badge {
+    padding: .3rem .8rem; border-radius: 4px;
+    font-size: .72rem; font-weight: 500;
+    white-space: nowrap; align-self: flex-start;
+    font-family: 'DM Mono', monospace;
+  }
+  .b-green { background: var(--green-light); color: var(--green); }
+  .b-orange { background: var(--orange-light); color: var(--orange); }
+  .b-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* patent */
+  .patent-strip {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--off); border: 1px solid var(--rule); border-radius: 6px;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .patent-icon { font-size: 1.1rem; }
+  .patent-text { font-size: .84rem; font-weight: 500; color: var(--ink); }
+  .patent-meta { font-family: 'DM Mono', monospace; font-size: .68rem; color: var(--light); }
+
+  /* ─── SKILLS ─── */
+  .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .skill-block { background: var(--white); padding: 1.8rem 2rem; }
+  .skill-block:hover { background: var(--off); }
+  .skill-title {
+    font-size: .72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--light); margin-bottom: 1rem;
+  }
+  .s-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .s-tag {
+    font-size: .78rem; padding: .28rem .7rem;
+    border-radius: 3px; background: var(--off);
+    border: 1px solid var(--rule); color: var(--mid);
+  }
+  .s-tag.blue { background: var(--blue-light); border-color: #c5d9f7; color: var(--blue); }
+  .s-tag.green { background: var(--green-light); border-color: #b0d9be; color: var(--green); }
+
+  /* ─── EXPERIENCE ─── */
+  .exp-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .exp-item { background: var(--white); padding: 2rem 2.2rem; display: grid; grid-template-columns: 80px 1fr; gap: 1.8rem; align-items: start; transition: .2s; }
+  .exp-item:hover { background: var(--off); }
+  .exp-icon { width: 48px; height: 48px; border-radius: 8px; background: var(--off); border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--light); letter-spacing: .5px; margin-bottom: .35rem; }
+  .exp-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--black); margin-bottom: .15rem; }
+  .exp-company { font-size: .8rem; color: var(--blue); font-weight: 500; margin-bottom: .8rem; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+  .exp-points li { font-size: .84rem; color: var(--mid); display: flex; gap: .7rem; line-height: 1.5; font-weight: 300; }
+  .exp-points li::before { content: '—'; color: var(--rule); flex-shrink: 0; }
+
+  /* ─── PUBS ─── */
+  .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .pub-item { background: var(--white); padding: 1.6rem 2rem; display: flex; gap: 1.2rem; align-items: flex-start; transition: .2s; }
+  .pub-item:hover { background: var(--off); }
+  .pub-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--rule); line-height: 1; flex-shrink: 0; min-width: 2rem; }
+  .pub-title { font-size: .93rem; font-weight: 500; color: var(--black); margin-bottom: .3rem; line-height: 1.4; }
+  .pub-venue { font-size: .75rem; color: var(--blue); font-weight: 500; }
+
+  /* ─── CERTS ─── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: .8rem; }
+  .cert-item { background: var(--off); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem 1.2rem; transition: .2s; }
+  .cert-item:hover { border-color: #ccc; background: var(--white); }
+  .cert-name { font-size: .84rem; font-weight: 500; color: var(--black); margin-bottom: .2rem; }
+  .cert-org { font-size: .7rem; color: var(--light); font-family: 'DM Mono', monospace; }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding: 6rem 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .contact-left h2 { font-size: 2.4rem; margin-bottom: 1rem; }
+  .contact-left p { font-size: .92rem; color: var(--mid); line-height: 1.75; font-weight: 300; }
+  .contact-right { display: flex; flex-direction: column; gap: .75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid var(--rule); border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    background: var(--off); transition: .2s;
+  }
+  .contact-link:hover { border-color: var(--blue); background: var(--blue-light); }
+  .contact-link:hover .cl-label { color: var(--blue); }
+  .cl-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .cl-label { font-size: .85rem; font-weight: 500; transition: color .2s; }
+  .cl-sub { font-size: .72rem; color: var(--light); margin-top: .05rem; font-family: 'DM Mono', monospace; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: .75rem; color: var(--light);
+  }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: .85rem; color: var(--mid); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .container { padding: 0 1.5rem; }
+    #hero { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 0 3rem; }
+    .hero-avatar { width: 120px; height: 120px; }
+    .avatar-initials { font-size: 2rem; }
+    .stats-row { flex-wrap: wrap; }
+    .stat { min-width: 50%; border-bottom: 1px solid var(--rule); }
+    .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+    .stat:nth-child(even) { border-right: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.2rem; }
+    .project-item { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-icon { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Ajay Jadeja</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:ajayjadejalinkedin@gmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div>
+      <div class="hero-eyebrow">Electronics & Communication Engineering</div>
+      <h1>Building at the<br/>edge of <em>silicon</em><br/>and intelligence.</h1>
+      <p class="hero-bio">
+        B.Tech ECE student at <strong>SRM Institute of Science & Technology</strong> with a <strong>9.20 CGPA</strong>.
+        I design embedded systems, train deep learning models, and ship production software —
+        from ESP32 firmware to AI-powered intrusion detection. Published researcher. Patent holder.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View my work</a>
+        <a href="mailto:ajayjadejalinkedin@gmail.com" class="btn-text">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-initials">AJ</div>
+      <div class="avatar-sub">ECE × AI/ML</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row reveal">
+    <div class="stat">
+      <div class="stat-n">9.20</div>
+      <div class="stat-l">CGPA / 10</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">98.7%</div>
+      <div class="stat-l">IDS Model Accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">Research Papers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">1</div>
+      <div class="stat-l">Patent Filed</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section class="section reveal" id="projects">
+    <div class="section-label">Projects</div>
+    <h2>Selected work</h2>
+    <p class="section-sub">Spanning deep learning, embedded systems, and production web apps.</p>
+    <div class="project-list">
+
+      <div class="project-item">
+        <div>
+          <div class="p-index">01 · Ongoing · Feb 2025 – Present</div>
+          <div class="p-name">AI-Powered Intrusion Detection System</div>
+          <div class="p-stack">Deep Reinforcement Learning · CNN · Cloud Security</div>
+          <p class="p-desc">A DRL and CNN hybrid that detects network threats in real time. Designed to scale across IoT, enterprise, and cloud environments. Achieves 98.7% detection accuracy. Research published at ICICCS 2025.</p>
+          <div class="p-tags">
+            <span class="p-tag">Deep RL</span><span class="p-tag">CNN</span><span class="p-tag">TensorFlow</span><span class="p-tag">IoT Security</span><span class="p-tag">Cloud</span>
+          </div>
+        </div>
+        <span class="badge b-green">98.7% Accuracy</span>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <div class="p-index">02 · Jan – Mar 2024</div>
+          <div class="p-name">Gypsy Rover — Wildlife Alert & Navigation</div>
+          <div class="p-stack">YOLO · ESP32-CAM · IoT · Embedded C</div>
+          <p class="p-desc">An AI rover for wildlife monitoring. YOLO-based animal detection runs on ESP32-CAM; ultrasonic sensors handle obstacle avoidance. Live IoT alerts and data logging keep rangers informed in real time. Won 2nd prize at departmental expo.</p>
+          <div class="p-tags">
+            <span class="p-tag">YOLO</span><span class="p-tag">ESP32-CAM</span><span class="p-tag">Arduino</span><span class="p-tag">Embedded C</span><span class="p-tag">IoT</span>
+          </div>
+        </div>
+        <span class="badge b-orange">🏆 2nd Prize</span>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <div class="p-index">03 · Dec 2024 – Jan 2025</div>
+          <div class="p-name">Transit Bot — CMRL Exit Pathway App</div>
+          <div class="p-stack">Angular · Google Maps API · REST API</div>
+          <p class="p-desc">Metro exit guidance app built for and deployed by Chennai Metro Rail. Multimodal transit integration via Google Maps API cut navigation time by ~30%. Used by real commuters every day.</p>
+          <div class="p-tags">
+            <span class="p-tag">Angular</span><span class="p-tag">Google Maps API</span><span class="p-tag">TypeScript</span><span class="p-tag">REST API</span>
+          </div>
+        </div>
+        <span class="badge b-blue">Live / Deployed</span>
+      </div>
+
+    </div>
+
+    <div class="patent-strip">
+      <span class="patent-icon">⚡</span>
+      <div>
+        <div class="patent-text">Patent Filed — Blockchain-Based Communication Device</div>
+        <div class="patent-meta">Indian Patent Office · August 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section reveal" id="skills">
+    <div class="section-label">Skills</div>
+    <h2>Technical expertise</h2>
+    <p class="section-sub">Across hardware, software, and intelligence.</p>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <div class="skill-title">AI / Machine Learning</div>
+        <div class="s-tags">
+          <span class="s-tag blue">Machine Learning</span>
+          <span class="s-tag blue">Deep Reinforcement Learning</span>
+          <span class="s-tag blue">CNN</span>
+          <span class="s-tag blue">YOLO</span>
+          <span class="s-tag blue">TensorFlow</span>
+          <span class="s-tag blue">AWS IoT</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Embedded & IoT</div>
+        <div class="s-tags">
+          <span class="s-tag green">ESP32</span>
+          <span class="s-tag green">Arduino</span>
+          <span class="s-tag green">ARM</span>
+          <span class="s-tag green">Embedded C</span>
+          <span class="s-tag green">OrCAD PSpice</span>
+          <span class="s-tag green">Sensors & Actuators</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Programming Languages</div>
+        <div class="s-tags">
+          <span class="s-tag">Python</span>
+          <span class="s-tag">C</span>
+          <span class="s-tag">C++</span>
+          <span class="s-tag">Embedded C</span>
+          <span class="s-tag">Java</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Web & Cloud</div>
+        <div class="s-tags">
+          <span class="s-tag">Angular</span>
+          <span class="s-tag">HTML / CSS</span>
+          <span class="s-tag">REST API</span>
+          <span class="s-tag">Google Maps API</span>
+          <span class="s-tag">AWS</span>
+          <span class="s-tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section reveal" id="experience">
+    <div class="section-label">Experience</div>
+    <h2>Where I've worked</h2>
+    <p class="section-sub">Real-world engineering across government, manufacturing, and tech.</p>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-icon">🚇</div>
+        <div>
+          <div class="exp-date">DEC 2024 – JAN 2025</div>
+          <div class="exp-title">Front End Developer Intern</div>
+          <div class="exp-company">Chennai Metro Rail Limited (CMRL)</div>
+          <ul class="exp-points">
+            <li>Built interactive navigation UI using Angular, HTML, CSS, and JavaScript</li>
+            <li>Integrated Google Maps API for real-time metro exit guidance</li>
+            <li>Delivered production-ready app now used daily by metro commuters</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-icon">⚙️</div>
+        <div>
+          <div class="exp-date">JUN 2024 – JUL 2024</div>
+          <div class="exp-title">Assistant Engineer Intern</div>
+          <div class="exp-company">TAFE — Tractors and Farm Equipment Ltd.</div>
+          <ul class="exp-points">
+            <li>Assembled, tested, and optimized hardware components per engineering schematics</li>
+            <li>Performed server log analysis and system troubleshooting</li>
+            <li>Contributed to cross-functional projects bridging embedded systems with IT workflows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="section reveal" id="research">
+    <div class="section-label">Research</div>
+    <h2>Publications</h2>
+    <p class="section-sub">Peer-reviewed research across AI/ML and embedded systems.</p>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-num">01</div>
+        <div>
+          <div class="pub-title">Deep Reinforcement Learning-Enhanced Intrusion Detection System</div>
+          <div class="pub-venue">ICICCS 2025 — International Conference on Intelligent Computing & Control Systems</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">02</div>
+        <div>
+          <div class="pub-title">Gypsy Rover — AI-Powered Wildlife Alert & Navigation System</div>
+          <div class="pub-venue">IETE Paper Presentation 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section reveal">
+    <div class="section-label">Certifications</div>
+    <h2>Credentials</h2>
+    <p class="section-sub">Verified learning from IIT Madras, AWS, and more.</p>
+    <div class="cert-grid">
+      <div class="cert-item"><div class="cert-name">NPTEL — Internet of Things</div><div class="cert-org">IIT Madras · May 2025</div></div>
+      <div class="cert-item"><div class="cert-name">ML & AI Fundamentals</div><div class="cert-org">AWS · Apr 2024</div></div>
+      <div class="cert-item"><div class="cert-name">OrCAD PSpice</div><div class="cert-org">Livewire, Chennai · May 2023</div></div>
+      <div class="cert-item"><div class="cert-name">Project Management</div><div class="cert-org">OHSC · Feb 2024</div></div>
+      <div class="cert-item"><div class="cert-name">Database Management</div><div class="cert-org">Saylor.org · Feb 2024</div></div>
+      <div class="cert-item"><div class="cert-name">Electric Motor Control</div><div class="cert-org">Allison · Oct 2024</div></div>
+      <div class="cert-item"><div class="cert-name">Idea Forge — 2nd Prize</div><div class="cert-org">DCDC · Jan 2025</div></div>
+      <div class="cert-item"><div class="cert-name">Wattathon</div><div class="cert-org">IETE-ECE · Sept 2024</div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="contact-left">
+      <div class="section-label" style="margin-bottom:1rem;">Contact</div>
+      <h2>Let's build<br/>something together.</h2>
+      <p style="margin-top:1rem;">Open to internships, research collaborations, and interesting engineering problems. I'm always happy to connect.</p>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:ajayjadejalinkedin@gmail.com" class="contact-link">
+        <span class="cl-icon">✉️</span>
+        <div>
+          <div class="cl-label">Email</div>
+          <div class="cl-sub">ajayjadejalinkedin@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/ajay-jadeja" class="contact-link" target="_blank">
+        <span class="cl-icon">💼</span>
+        <div>
+          <div class="cl-label">LinkedIn</div>
+          <div class="cl-sub">linkedin.com/in/ajay-jadeja</div>
+        </div>
+      </a>
+      <a href="https://github.com/draculabelmont" class="contact-link" target="_blank">
+        <span class="cl-icon">🐙</span>
+        <div>
+          <div class="cl-label">GitHub</div>
+          <div class="cl-sub">github.com/draculabelmont</div>
+        </div>
+      </a>
+      <a href="tel:+917695889939" class="contact-link">
+        <span class="cl-icon">📱</span>
+        <div>
+          <div class="cl-label">Phone</div>
+          <div class="cl-sub">+91 76958 89939</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-name">Ajay Jadeja</div>
+  <div>Chennai, India · B.Tech ECE · SRM IST · © 2025</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
